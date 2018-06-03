@@ -97,7 +97,6 @@ public class DefaultCommandPathVariableResolver implements CommandPathVariableRe
 			pathToResolve = recursedPath; 
 		}
 			
-		
 		if(StringUtils.startsWithIgnoreCase(pathToResolve, Constants.MARKER_SESSION_SELF.code))
 			return mapSelf(param, pathToResolve);
 		
@@ -105,7 +104,7 @@ public class DefaultCommandPathVariableResolver implements CommandPathVariableRe
 			return StringUtils.removeStart(param.getPath(), param.getRootDomain().getPath());
 		
 		if(StringUtils.startsWithIgnoreCase(pathToResolve, Constants.MARKER_REF_ID.code))
-			return param.getRootExecution().getRootCommand().getRefId(Type.DomainAlias);
+			return String.valueOf(param.getRootExecution().getRootCommand().getRefId(Type.DomainAlias));
 
 		if(StringUtils.startsWithIgnoreCase(pathToResolve, Constants.MARKER_ELEM_ID.code)) 
 			return mapColElem(param, pathToResolve);
@@ -117,8 +116,10 @@ public class DefaultCommandPathVariableResolver implements CommandPathVariableRe
 	protected String mapSelf(Param<?> param, String pathToResolve) {
 		if(StringUtils.endsWith(pathToResolve, "loginId"))
 			return Optional.ofNullable(sessionProvider.getLoggedInUser()).orElseGet(() -> new ClientUser()).getLoginId();
-		if(StringUtils.endsWith(pathToResolve, "id"))
-			return Optional.ofNullable(sessionProvider.getLoggedInUser()).orElseGet(() -> new ClientUser()).getId();
+		if(StringUtils.endsWith(pathToResolve, "id")) {
+			Long id = Optional.ofNullable(sessionProvider.getLoggedInUser()).orElseGet(() -> new ClientUser()).getId();
+			return String.valueOf(id);
+		}
 		
 		return param.getRootExecution().getRootCommand().getElement(Type.ClientAlias).get().getAlias();
 	}
@@ -132,7 +133,7 @@ public class DefaultCommandPathVariableResolver implements CommandPathVariableRe
 				return STRING_NULL;
 			}
 			Object state = p.getLeafState();
-			String json = converter.write(state);
+			String json = converter.toJson(state);
 			return String.valueOf(json);
 		} else {
 			Param<?> p = param.findParamByPath(pathToResolve) != null? param.findParamByPath(pathToResolve): param.getParentModel().findParamByPath(pathToResolve);

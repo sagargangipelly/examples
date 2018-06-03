@@ -63,7 +63,6 @@ public class EventHandlerConfigFactory {
 		
 		// onStateChange
 		buildInternal(aElem, OnStateChange.class, OnStateChangeHandler.class, (a,h)->eventConfig.add(a, h));
-
 		
 		return eventConfig.isEmpty() ? null : eventConfig;
 	}

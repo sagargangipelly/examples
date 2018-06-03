@@ -17,7 +17,6 @@
 'use strict';
 import { DomainFlowCmp } from './components/domain/domain-flow.component';
 import { StyleGuideCmp } from './styleguide/style-guide.component';
-import { MainLayoutCmp } from './components/home/main-layout.component';
 import { HomeLayoutCmp } from './components/home/home-layout.component';
 import { LoginLayoutCmp } from './components/login/login-layout.component';
 import { LoginCmp } from './components/login/login.component';
@@ -26,7 +25,6 @@ import { LayoutResolver } from './components/domain/layout-resolver.service';
 import { PageResolver } from './components/platform/content/page-resolver.service';
 import { PageNotfoundComponent } from './components/platform/content/page-notfound.component';
 import { PageContent } from './components/platform/content/page-content.component';
-import { FlowWrapper } from './components/platform/content/flow-wrapper.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

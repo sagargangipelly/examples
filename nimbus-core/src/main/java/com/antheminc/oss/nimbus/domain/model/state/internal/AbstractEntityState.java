@@ -40,13 +40,11 @@ import com.antheminc.oss.nimbus.domain.model.state.Notification;
 import com.antheminc.oss.nimbus.domain.model.state.Notification.ActionType;
 import com.antheminc.oss.nimbus.domain.model.state.ParamEvent;
 import com.antheminc.oss.nimbus.domain.model.state.RulesRuntime;
-import com.antheminc.oss.nimbus.domain.model.state.EntityState.Param;
 import com.antheminc.oss.nimbus.domain.model.state.event.listener.EventListener;
 import com.antheminc.oss.nimbus.entity.process.ProcessFlow;
 import com.antheminc.oss.nimbus.support.Holder;
 import com.antheminc.oss.nimbus.support.JustLogit;
 import com.antheminc.oss.nimbus.support.pojo.LockTemplate;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -56,7 +54,7 @@ import lombok.Setter;
  * @author Soham Chakravarti
  *
  */
-@JsonFilter("default.entityState.filter")
+//@JsonFilter("default.entityState.filter")
 @Getter @Setter
 public abstract class AbstractEntityState<T> implements EntityState<T> {
 

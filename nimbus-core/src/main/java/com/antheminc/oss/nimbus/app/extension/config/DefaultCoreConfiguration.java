@@ -21,7 +21,6 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,13 +36,13 @@ import com.antheminc.oss.nimbus.domain.model.state.repo.ModelRepositoryFactory;
 import com.antheminc.oss.nimbus.domain.model.state.repo.ParamStateRepository;
 import com.antheminc.oss.nimbus.domain.model.state.repo.ParamStateRepositoryGateway;
 import com.antheminc.oss.nimbus.domain.model.state.repo.SpringSecurityAuditorAware;
-import com.antheminc.oss.nimbus.domain.model.state.repo.db.ClientUserGrooupSearchResponseConverter;
 import com.antheminc.oss.nimbus.domain.model.state.repo.db.ParamStateAtomicPersistenceEventListener;
 import com.antheminc.oss.nimbus.domain.model.state.repo.ws.DefaultWSModelRepository;
 import com.antheminc.oss.nimbus.domain.rules.DefaultRulesEngineFactoryProducer;
 import com.antheminc.oss.nimbus.domain.rules.drools.DroolsRulesEngineFactory;
 import com.antheminc.oss.nimbus.support.pojo.JavaBeanHandler;
-import com.antheminc.oss.nimbus.support.pojo.reflection.JavaBeanHandlerReflection;
+import com.antheminc.oss.nimbus.support.pojo.JavaBeanHandlerLambda;
+import com.antheminc.oss.nimbus.support.pojo.JavaBeanHandlerReflection;
 
 /**
  * @author Sandeep Mantha
@@ -102,7 +101,7 @@ public class DefaultCoreConfiguration {
 	}
 	
 	@Bean(name="default.java.bean.handler")
-	public JavaBeanHandlerReflection javaBeanHandlerReflection(){
+	public JavaBeanHandler javaBeanHandler(){
 		return new JavaBeanHandlerReflection();
 	}
 	
@@ -118,11 +117,6 @@ public class DefaultCoreConfiguration {
 	}
 	
 
-	@Bean(name="clientUserGrooupSearchResponseConverter")
-	Converter clientUserGroupConverter() {
-		return new ClientUserGrooupSearchResponseConverter();
-	}
-	
 	@Bean
 	public AuditorAware<String> auditorProvider(BeanResolverStrategy beanResolver) {
 		return new SpringSecurityAuditorAware(beanResolver);
