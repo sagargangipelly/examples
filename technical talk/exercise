@@ -1,7 +1,27 @@
-The technologies used in this application are spring core ,spring boot and angular js.
+1.The technologies used in this application are spring core ,spring boot and angular js.
 
- @Config annotations are used in the framework to cofigure settings like @Configuration
+2.  @Config annotations are used in the framework to cofigure settings like @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix="domain.model")
 @Getter @Setter
 
+3.  Interface with MongoDB within the framework is DBSequence.java
+
+examples
+
+@Domain(value="sequence")
+@Repo(Database.rep_mongodb)
+@Getter @Setter @ToString(callSuper=true)
+public class DBSequence {
+
+4.
+
+
+public class QueryDslQClassTest {
+
+	@Test
+	public void test_QClass_lookup() {
+		EntityPath<UserRole> qClassActual = SimpleEntityPathResolver.INSTANCE.createPath(UserRole.class);
+		assertEquals(QUserRole.userRole, qClassActual);
+	}
+}
