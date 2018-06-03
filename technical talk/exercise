@@ -1,3 +1,7 @@
 The technologies used in this application are spring core ,spring boot and angular js.
 
+ @Config annotations are used in the framework to cofigure settings like @Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties(prefix="domain.model")
+@Getter @Setter
 
